@@ -116,7 +116,7 @@ class NodesModel(ModelBase):
                GREATEST(0, LEAST((os['cpu']['system'] + os['cpu']['user'] + os['cpu']['stolen'])::LONG, 100)) AS cpu_used,
                GREATEST(0, LEAST((os['cpu']['idle'])::LONG, 100)) AS cpu_idle,
                os['timestamp'] as hosttime,
-               process['cpu'] as process,
+               GREATEST(0, LEAST((process['cpu']['percent'])::LONG, 100)) as process_percent,
                os_info['available_processors'] as cpus,
                load,
                heap,
